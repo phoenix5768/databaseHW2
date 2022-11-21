@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <br>
+    <center>
+        <h1>Users Page</h1>
+    </center>
+    <br>
+
+    <h2>Users List: 
+      {% if user.is_authenticated %}
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'add-user' %}">Add User</a> 
+      {% endif %}
+    </h2>
+    <br>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Full Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Phone number</th>
+            <th scope="col">Country</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for use in users %}
+            <tr>
+                <td>{{ use.name }} {{ use.surname }}</td>
+                <td>{{ use.email }}</td>
+                <td>{{ use.salary }}</td>
+                <td>{{ use.phone }}</td>
+                <td>{{ use.cname }}</td>
+                <td align="right">
+                  {% if user.is_authenticated %}
+                    <a class="btn btn-outline-secondary btn-sm" href="{% url 'update-user' use.email %}">update</a>
+                  {% else %}
+                    <p> disabled <p>
+                  {% endif %}
+                </td>
+                <td align="right">
+                  {% if user.is_authenticated %}
+                    <a class="btn btn-outline-danger btn-sm" href="{% url 'delete-user' use.email %}">delete</a>
+                  {% else %}
+                    <p> disabled <p>
+                  {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <h2>Our Doctors: 
+      {% if user.is_authenticated %}
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'add-doctor' %}">Add Doctor</a>
+      {% endif %}
+    </h2>
+    <br>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Doctor</th>
+            <th scope="col">Degree</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for doctor in doctors %}
+            <tr>
+                <td>{{ doctor.email.name }} {{ doctor.email.surname }}</td>
+                <td>{{ doctor.degree }}</td>
+                <td align="right">
+                  {% if user.is_authenticated %}
+                    <a class="btn btn-outline-secondary btn-sm" href="{% url 'update-doctor' doctor.email.email %}">update</a>
+                  {% else %}
+                    <p> disabled <p>
+                  {% endif %}
+                </td>
+                <td align="right">
+                {% if user.is_authenticated %}
+                  <a class="btn btn-outline-danger btn-sm" href="{% url 'delete-doctor' doctor.email.email %}">delete</a>
+                {% else %}
+                  <p> disabled <p>
+                {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <h2>Their Specializations: 
+      {% if user.is_authenticated %}
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'add-specialize' %}">Add Specialize</a>
+      {% endif %}
+    </h2>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Email</th>
+            <th scope="col">Specialize</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for specialization in specializations %}
+            <tr>
+                <td>{{ specialization.email.email.name }} {{ specialization.email.email.surname }}</td>
+                <td>{{ specialization.id.description }}</td>
+                <td align="right">
+                  {% if user.is_authenticated %}
+                    <a class="btn btn-outline-secondary btn-sm" href="{% url 'update-specialize' specialization.id.id %}">update</a>
+                  {% else %}
+                    <p> disabled <p>
+                  {% endif %}
+                </td>
+                <td align="right">
+                  {% if user.is_authenticated %}
+                    <a class="btn btn-outline-danger btn-sm" href="{% url 'delete-specialize' specialization.id.id %}">delete</a>
+                  {% else %}
+                    <p> disabled <p>
+                  {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <h2>Public Servants: 
+      {% if user.is_authenticated %}
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'add-servant' %}">Add Public Servant</a>
+      {% endif %}
+    </h2>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Full Name</th>
+            <th scope="col">Department</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for servant in servants %}
+            <tr>
+                <td>{{ servant.email.name }} {{ servant.email.surname }}</td>
+                <td>{{ servant.department }}</td>
+                <td align="right">
+                  {% if user.is_authenticated %}
+                    <a class="btn btn-outline-secondary btn-sm" href="{% url 'update-servant' servant.email.email %}">update</a>
+                  {% else %}
+                    <p> disabled <p>
+                  {% endif %}
+                </td>
+                <td align="right">
+                  {% if user.is_authenticated %}
+                    <a class="btn btn-outline-danger btn-sm" href="{% url 'delete-servant' servant.email.email %}">delete</a>
+                  {% else %}
+                    <p> disabled <p>
+                  {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <center>
+        <h1>Records Page</h1>
+    </center>
+    <br>
+
+    <h2>Records:
+        {% if user.is_authenticated %} 
+            <a class="btn btn-outline-primary btn-sm" href="{% url 'add-record' %}">Add Record</a>
+        {% endif %}
+    </h2>
+    <br>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Email</th>
+            <th scope="col">Country name</th>
+            <th scope="col">Disease code</th>
+            <th scope="col">Total deaths</th>
+            <th scope="col">Total patients</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for record in records %}
+            <tr>
+                <td>{{ record.email.email.email }}</td>
+                <td>{{ record.cname.cname }}</td>
+                <td>{{ record.disease_code.disease_code }}</td>
+                <td>{{ record.total_deaths }}</td>
+                <td>{{ record.total_patients }}</td>
+                <td align="right">
+                    {% if user.is_authenticated %}
+                        <a class="btn btn-outline-secondary btn-sm" href="{% url 'update-record' record.email.email.email record.cname.cname record.disease_code.disease_code %}">update</a>
+                    {% else %}
+                        <p> disabled <p>
+                    {% endif %}
+                </td>
+                <td align="right">
+                    {% if user.is_authenticated %}
+                        <a class="btn btn-outline-danger btn-sm" href="{% url 'delete-record' record.email.email.email record.cname.cname record.disease_code.disease_code %}">delete</a>
+                    {% else %}
+                        <p> disabled <p>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br><br>
+
+
+
+{% endblock %}

@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <center>
+        <h1>Disease Page</h1>
+    </center>
+    <br>
+
+    <h2>Countries:
+      {% if user.is_authenticated %} 
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'add-country' %}">Add country</a>
+      {% endif %}
+    </h2>
+    <br>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Country name</th>
+            <th scope="col">Population</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for country in countries %}
+            <tr>
+                <td>{{ country.cname }}</td>
+                <td>{{ country.population }}</td>
+                <td align="right">
+                  {% if user.is_authenticated %}
+                    <a class="btn btn-outline-secondary btn-sm" href="{% url 'update-country' country.cname %}">update</a>
+                  {% else %}
+                    <p> disabled <p>
+                  {% endif %}
+                </td>
+                <td align="right">
+                  {% if user.is_authenticated %}
+                    <a class="btn btn-outline-danger btn-sm" href="{% url 'delete-country' country.cname %}">delete</a>
+                  {% else %}
+                        <p> disabled <p>
+                  {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    
+
+    <h2>Diseases: 
+      {% if user.is_authenticated %}
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'add-disease' %}">Add Disease</a>
+      {% endif %}
+    </h2>
+    <br>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Disease Code</th>
+            <th scope="col">Pathogen</th>
+            <th scope="col">Description</th>
+            <th scope="col">ID</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for disease in diseases %}
+            <tr>
+                <td>{{ disease.disease_code }}</td>
+                <td>{{ disease.pathogen }}</td>
+                <td>{{ disease.description }}</td>
+                <td>{{ disease.id.id }}</td>
+                <td align="right">
+                  {% if user.is_authenticated %}
+                    <a class="btn btn-outline-secondary btn-sm" href="{% url 'update-disease' disease.disease_code %}">update</a>
+                  {% else %}
+                    <p> disabled <p>
+                  {% endif %}
+                </td>
+                <td align="right">
+                  {% if user.is_authenticated %}
+                    <a class="btn btn-outline-danger btn-sm" href="{% url 'delete-disease' disease.disease_code %}">delete</a>
+                  {% else %}
+                        <p> disabled <p>
+                  {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <h2>Disease Types:
+      {% if user.is_authenticated %} 
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'add-diseasetype' %}">Add Disease Type</a>
+      {% endif %}
+    </h2>
+    <br>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Description</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for diseasetype in diseasetypes %}
+            <tr>
+                <td>{{ diseasetype.id }}</td>
+                <td>{{ diseasetype.description }}</td>
+                <td align="right">
+                  {% if user.is_authenticated %}
+                    <a class="btn btn-outline-secondary btn-sm" href="{% url 'update-diseasetype' diseasetype.id %}">update</a>
+                  {% else %}
+                    <p> disabled <p>
+                  {% endif %}
+                </td>
+                <td align="right">
+                  {% if user.is_authenticated %}
+                    <a class="btn btn-outline-danger btn-sm" href="{% url 'delete-diseasetype' diseasetype.id %}">delete</a>
+                  {% else %}
+                      <p> disabled <p>
+                  {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <h2>Discoveries: 
+      {% if user.is_authenticated %}
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'add-discover' %}">Add Discovery</a>
+      {% endif %}
+    </h2>
+    <br>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Country Name</th>
+            <th scope="col">Disease Code</th>
+            <th scope="col">Discovered in</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for discovery in discoveries %}
+            <tr>
+                <td>{{ discovery.cname.cname }}</td>
+                <td>{{ discovery.disease_code.disease_code }}</td>
+                <td>{{ discovery.first_enc_date }}</td>
+                <td align="right">
+                  {% if user.is_authenticated %}
+                    <a class="btn btn-outline-secondary btn-sm" href="{% url 'update-discover' discovery.cname discovery.disease_code %}">update</a>
+                  {% else %}
+                      <p> disabled <p>
+                  {% endif %}
+                  </td>
+                <td align="right">
+                  {% if user.is_authenticated %}
+                    <a class="btn btn-outline-danger btn-sm" href="{% url 'delete-discover' discovery.cname discovery.disease_code %}">delete</a>
+                  {% else %}
+                    <p> disabled <p>
+                  {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br><br><br>
+
+
+
+{% endblock %}

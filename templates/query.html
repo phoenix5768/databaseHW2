@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <center>
+        <h1>Queries</h1>
+    </center>
+    <br><br>
+
+    <h3>Query 1</h3>
+    <p>Diseases that are caused by "bacteria" and were discovered before 1990:</p>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Disease code</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for code, desc in q1 %}
+            <tr>
+                <td>{{ code }}</td>
+                <td>{{ desc }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <h3>Query 2</h3>
+    <p>Doctors who are not specialized in "infectious diseases":</p>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+            <th scope="col">Degree</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for name, surname, degree in q2 %}
+            <tr>
+                <td>{{ name }}</td>
+                <td>{{ surname }}</td>
+                <td>{{ degree }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <h3>Query 3</h3>
+    <p>Doctors who are specialized in more than 2 disease types:</p>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+            <th scope="col">Degree</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for name, surname, degree in q3 %}
+            <tr>
+                <td>{{ name }}</td>
+                <td>{{ surname }}</td>
+                <td>{{ degree }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <h3>Query 4</h3>
+    <p>Country name and average salary of doctors who are specialized in "virology":</p>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Country name</th>
+            <th scope="col">Average Salary</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for cname, avg in q4 %}
+            <tr>
+                <td>{{ cname }}</td>
+                <td>{{ avg }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <h3>Query 5</h3>
+    <p>Departments of public servants who report "covid-19" cases in more than one country and the number of such public servants who work in these departments:</p>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Department</th>
+            <th scope="col">Number of Public Servants</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for dep, num in q5 %}
+            <tr>
+                <td>{{ dep }}</td>
+                <td>{{ num }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <h3>Query 6</h3>
+    <p>Public servants (who recorded "covid-19" patients more than 3 times) whos salary has to be doubled - BEFORE SALARY INCREASE:</p>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Email</th>
+            <th scope="col">Salary</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for email, salary in q6 %}
+            <tr>
+                <td>{{ email }}</td>
+                <td>{{ salary }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <h3>Query 7</h3>
+    <p>Following users will be deleted as their name contain the substring "bek" or "gul":</p>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Email</th>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for email, name, surname in q7 %}
+            <tr>
+                <td>{{ email }}</td>
+                <td>{{ name }}</td>
+                <td>{{ surname }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <h3>Query 8</h3>
+    <p>This query just creates an index "idx_pathogen". There is no reason of displaying it there</p>
+    <br>
+
+    <h3>Query 9</h3>
+    <p>Public Servants who have created records where the number of patients is between 100000 and 999999:</p>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Email</th>
+            <th scope="col">Name</th>
+            <th scope="col">Department</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for email, name, dep in q9 %}
+            <tr>
+                <td>{{ email }}</td>
+                <td>{{ name }}</td>
+                <td>{{ dep }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <h3>Query 10</h3>
+    <p>Top 5 countries with the highest number of total patients recorded:</p>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Country name</th>
+            <th scope="col">Total patients</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for name, num in q10 %}
+            <tr>
+                <td>{{ name }}</td>
+                <td>{{ num }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    
+    <h3>Query 11</h3>
+    <p>Group the diseases by disease type and the total number of patients treated:</p>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Disease description</th>
+            <th scope="col">Disease type description</th>
+            <th scope="col">Total patients</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for desc1, desc2, total in q11 %}
+            <tr>
+                <td>{{ desc1 }}</td>
+                <td>{{ desc2 }}</td>
+                <td>{{ total }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+
+{% endblock %}
